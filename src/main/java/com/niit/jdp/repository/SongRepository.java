@@ -60,7 +60,7 @@ public class SongRepository {
         return song;
     }
 
-    public List<Song> getSongArtistByName(String artistName) throws SQLException {
+    public List<Song> getSongByArtistName(String artistName) throws SQLException {
         String query = "SELECT * FROM `songdatabase`.`song` WHERE `artist` = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, artistName);
@@ -74,6 +74,22 @@ public class SongRepository {
             songList.add(song);
         }
 
+        return songList;
+    }
+
+    public List<Song> getSongByGenre(String genreName) throws SQLException {
+        String query = "SELECT * FROM `songdatabase`.`song` WHERE `genre` = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, genreName);
+        ResultSet set = preparedStatement.executeQuery();
+        while (set.next()) {
+            int songId = set.getInt("songId");
+            String songName1 = set.getString("songName");
+            String genre = set.getString("genre");
+            String artist = set.getString("artist");
+            song = new Song(songId, songName1, genre, artist);
+            songList.add(song);
+        }
         return songList;
     }
 }

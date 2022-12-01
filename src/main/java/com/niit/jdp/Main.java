@@ -16,8 +16,12 @@ public class Main {
 //
 //        System.out.println("songRepository.getSongByName(\"Aaja\") = " + songRepository.getSongByName("Wangan"));
 
-        List<Song> songByArtist = songRepository.getSongArtistByName("Maan");
-        for (Song song : songByArtist) {
+//        List<Song> songByArtist = songRepository.getSongByArtistName("Maan");
+//        for (Song song : songByArtist) {
+//            System.out.println(song);
+//        }
+        List<Song> sadSong = songRepository.getSongByGenre("sad");
+        for (Song song : sadSong) {
             System.out.println(song);
         }
 
