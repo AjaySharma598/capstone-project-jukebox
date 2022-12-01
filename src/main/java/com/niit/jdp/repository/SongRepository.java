@@ -44,17 +44,21 @@ public class SongRepository {
         return songList;
     }
 
-    public Song getSongByName(String songName) throws SQLException {
-        String query = "SELECT * FROM `songdatabase`.`song` WHERE `songName` = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, songName);
-        ResultSet set = preparedStatement.executeQuery();
-        if (set.next()) {
-            int songId = set.getInt("songId");
-            String songName1 = set.getString("songName");
-            String genre = set.getString("genre");
-            String artist = set.getString("artist");
-            song = new Song(songId, songName1, genre, artist);
+    public Song getSongByName(String songName) throws SQLException, SongNotFoundException {
+        if (songName == null) {
+            throw new SongNotFoundException("Song Not Found");
+        } else {
+            String query = "SELECT * FROM `songdatabase`.`song` WHERE `songName` = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, songName);
+            ResultSet set = preparedStatement.executeQuery();
+            if (set.next()) {
+                int songId = set.getInt("songId");
+                String songName1 = set.getString("songName");
+                String genre = set.getString("genre");
+                String artist = set.getString("artist");
+                song = new Song(songId, songName1, genre, artist);
+            }
         }
         return song;
     }
