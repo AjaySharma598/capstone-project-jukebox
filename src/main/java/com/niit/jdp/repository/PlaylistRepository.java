@@ -21,35 +21,31 @@ public class PlaylistRepository {
     Connection connection;
     DatabaseService databaseService;
     Song song = new Song();
-    Playlist playlist = new Playlist();
+    Playlist playlist;
     List<Song> songList = new ArrayList<>();
 
     public PlaylistRepository() throws SQLException, ClassNotFoundException {
         databaseService = new DatabaseService();
         connection = databaseService.getConnection();
+        playlist = new Playlist();
     }
 
-    public Playlist createPlaylist(String playlistName) {
+    public Playlist createPlaylist(String playlistName) throws SQLException {
         String query = "INSERT INTO `songdatabase`.`playlist`(`playlist_Name`) VALUES (?);";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, playlistName);
-            int set = preparedStatement.executeUpdate();
-            if (set > 0) {
-                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    playlist.setPlaylistId(generatedKeys.getInt(1));
-                    playlist.setPlaylistName(playlistName);
+
+        PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+        preparedStatement.setString(1, playlistName);
+        int set = preparedStatement.executeUpdate();
+        if (set > 0) {
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                playlist.setPlaylistId(generatedKeys.getInt(1));
+                playlist.setPlaylistName(playlistName);
                 }
             }
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
         return playlist;
     }
-
 
     public boolean addSongsToPlaylist(int playlistId, String songIds) throws SQLException {
         String updateQuery = "update `songdatabase`.`playlist` set `songId` = ? where `playlist_Id` = ?;";
