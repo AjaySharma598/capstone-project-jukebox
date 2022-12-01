@@ -6,6 +6,8 @@
 
 package com.niit.jdp.model;
 
+import java.util.Objects;
+
 public class Playlist {
     private int playlistId;
     private String playlistName;
@@ -44,4 +46,24 @@ public class Playlist {
         SongId = songId;
     }
 
+    @Override
+    public String toString() {
+        return "Playlist{" +
+                "playlistId=" + playlistId +
+                ", playlistName='" + playlistName + '\'' +
+                ", SongId=" + SongId +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Playlist playlist)) return false;
+        return getPlaylistId() == playlist.getPlaylistId() && getSongId() == playlist.getSongId() && Objects.equals(getPlaylistName(), playlist.getPlaylistName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPlaylistId(), getPlaylistName(), getSongId());
+    }
 }
