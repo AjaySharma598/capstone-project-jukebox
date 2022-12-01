@@ -21,7 +21,6 @@ public class SongRepository {
         databaseService = new DatabaseService();
         connection = databaseService.getConnection();
     }
-
     List<Song> songList = new ArrayList<>();
     Song song = new Song();
 
@@ -64,12 +63,12 @@ public class SongRepository {
         String query = "SELECT * FROM `songdatabase`.`song` WHERE `artist` = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, artistName);
-        ResultSet set = preparedStatement.executeQuery();
-        while (set.next()) {
-            int songId = set.getInt("songId");
-            String songName1 = set.getString("songName");
-            String genre = set.getString("genre");
-            String artist = set.getString("artist");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            int songId = resultSet.getInt("songId");
+            String songName1 = resultSet.getString("songName");
+            String genre = resultSet.getString("genre");
+            String artist = resultSet.getString("artist");
             song = new Song(songId, songName1, genre, artist);
             songList.add(song);
         }
@@ -81,12 +80,12 @@ public class SongRepository {
         String query = "SELECT * FROM `songdatabase`.`song` WHERE `genre` = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, genreName);
-        ResultSet set = preparedStatement.executeQuery();
-        while (set.next()) {
-            int songId = set.getInt("songId");
-            String songName1 = set.getString("songName");
-            String genre = set.getString("genre");
-            String artist = set.getString("artist");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            int songId = resultSet.getInt("songId");
+            String songName1 = resultSet.getString("songName");
+            String genre = resultSet.getString("genre");
+            String artist = resultSet.getString("artist");
             song = new Song(songId, songName1, genre, artist);
             songList.add(song);
         }

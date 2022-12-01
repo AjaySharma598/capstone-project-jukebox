@@ -40,6 +40,12 @@
     "last_opened_file_path": "C:/Users/HP/IdeaProjects/capstone-project-jukebox/src/main/resources/Song"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\HP\IdeaProjects\capstone-project-jukebox\src\main\resources\Song" />
+      <recent name="C:\Users\HP\IdeaProjects\capstone-project-jukebox\src\main\resources" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.niit.jdp.Main" />
