@@ -35,7 +35,6 @@ public class SongRepository {
                 String songName = resultSet.getString("songName");
                 String genre = resultSet.getString("genre");
                 String artist = resultSet.getString("artist");
-
                 song = new Song(songId, songName, genre, artist);
                 songList.add(song);
             }
@@ -102,5 +101,25 @@ public class SongRepository {
             throw new SongNotFoundException("genre is not found in song list");
         }
         return songList;
+    }
+
+    public Song getSongBySongId(int songId) {
+        String query = "SELECT * FROM `songdatabase`.`song` WHERE `songId`=? ;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, songId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int songId1 = resultSet.getInt("songId");
+                String songName = resultSet.getString("songName");
+                String genre = resultSet.getString("genre");
+                String artist = resultSet.getString("artist");
+                song = new Song(songId1, songName, genre, artist);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return song;
     }
 }

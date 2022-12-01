@@ -6,20 +6,20 @@
 
 package com.niit.jdp.model;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Playlist {
     private int playlistId;
     private String playlistName;
-    private int SongId;
+    private List<Song> songs;
 
     public Playlist() {
     }
 
-    public Playlist(int playlistId, String playlistName, int songId) {
+    public Playlist(int playlistId, String playlistName) {
         this.playlistId = playlistId;
         this.playlistName = playlistName;
-        SongId = songId;
     }
 
     public int getPlaylistId() {
@@ -38,12 +38,12 @@ public class Playlist {
         this.playlistName = playlistName;
     }
 
-    public int getSongId() {
-        return SongId;
+    public List<Song> getSongs() {
+        return songs;
     }
 
-    public void setSongId(int songId) {
-        SongId = songId;
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Playlist {
         return "Playlist{" +
                 "playlistId=" + playlistId +
                 ", playlistName='" + playlistName + '\'' +
-                ", SongId=" + SongId +
+                ", songs=" + songs +
                 '}';
     }
 
@@ -59,11 +59,11 @@ public class Playlist {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Playlist playlist)) return false;
-        return getPlaylistId() == playlist.getPlaylistId() && getSongId() == playlist.getSongId() && Objects.equals(getPlaylistName(), playlist.getPlaylistName());
+        return getPlaylistId() == playlist.getPlaylistId() && Objects.equals(getPlaylistName(), playlist.getPlaylistName()) && Objects.equals(getSongs(), playlist.getSongs());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPlaylistId(), getPlaylistName(), getSongId());
+        return Objects.hash(getPlaylistId(), getPlaylistName(), getSongs());
     }
 }

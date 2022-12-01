@@ -6,7 +6,6 @@ import com.niit.jdp.repository.SongRepository;
 import com.niit.jdp.service.MusicPlayerService;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -25,13 +24,15 @@ public class Main {
 //        List<Song> songByArtist = songRepository.getSongByArtistName("Maan");
 //        for (Song song : songByArtist) {
 //            System.out.println(song);
+////        }
+//        List<Song> sadSong = songRepository.getSongByGenre("sad");
+//        for (Song song : sadSong) {
+//            System.out.println(song);
 //        }
-        List<Song> sadSong = songRepository.getSongByGenre("sad");
-        for (Song song : sadSong) {
-            System.out.println(song);
-        }
-        do {
-
-        } while (choice != 9);
+//        do {
+//
+//        } while (choice != 9);
+        Song songBySongId = songRepository.getSongBySongId(101);
+        System.out.println("songBySongId = " + songBySongId);
     }
 }
