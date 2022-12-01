@@ -45,9 +45,7 @@ public class SongRepository {
     }
 
     public Song getSongByName(String songName) throws SQLException, SongNotFoundException {
-        if (songName == null) {
-            throw new SongNotFoundException("Song Not Found");
-        } else {
+        if (songName != null) {
             String query = "SELECT * FROM `songdatabase`.`song` WHERE `songName` = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, songName);
@@ -58,40 +56,50 @@ public class SongRepository {
                 String genre = set.getString("genre");
                 String artist = set.getString("artist");
                 song = new Song(songId, songName1, genre, artist);
+            } else {
+
+                throw new SongNotFoundException("Song Not Found with this song name");
             }
         }
         return song;
     }
 
-    public List<Song> getSongByArtistName(String artistName) throws SQLException {
-        String query = "SELECT * FROM `songdatabase`.`song` WHERE `artist` = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, artistName);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            int songId = resultSet.getInt("songId");
-            String songName1 = resultSet.getString("songName");
-            String genre = resultSet.getString("genre");
-            String artist = resultSet.getString("artist");
-            song = new Song(songId, songName1, genre, artist);
-            songList.add(song);
+    public List<Song> getSongByArtistName(String artistName) throws SQLException, SongNotFoundException {
+        if (artistName != null) {
+            String query = "SELECT * FROM `songdatabase`.`song` WHERE `artist` = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, artistName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int songId = resultSet.getInt("songId");
+                String songName1 = resultSet.getString("songName");
+                String genre = resultSet.getString("genre");
+                String artist = resultSet.getString("artist");
+                song = new Song(songId, songName1, genre, artist);
+                songList.add(song);
+            }
+        } else {
+            throw new SongNotFoundException("Artist not found ");
         }
-
         return songList;
     }
 
-    public List<Song> getSongByGenre(String genreName) throws SQLException {
-        String query = "SELECT * FROM `songdatabase`.`song` WHERE `genre` = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, genreName);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            int songId = resultSet.getInt("songId");
-            String songName1 = resultSet.getString("songName");
-            String genre = resultSet.getString("genre");
-            String artist = resultSet.getString("artist");
-            song = new Song(songId, songName1, genre, artist);
-            songList.add(song);
+    public List<Song> getSongByGenre(String genreName) throws SQLException, SongNotFoundException {
+        if (genreName != null) {
+            String query = "SELECT * FROM `songdatabase`.`song` WHERE `genre` = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, genreName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int songId = resultSet.getInt("songId");
+                String songName1 = resultSet.getString("songName");
+                String genre = resultSet.getString("genre");
+                String artist = resultSet.getString("artist");
+                song = new Song(songId, songName1, genre, artist);
+                songList.add(song);
+            }
+        } else {
+            throw new SongNotFoundException("genre is not found in song list");
         }
         return songList;
     }
