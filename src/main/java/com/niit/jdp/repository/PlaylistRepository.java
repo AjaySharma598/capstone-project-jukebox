@@ -51,4 +51,13 @@ public class PlaylistRepository {
     }
 
 
+    public boolean addSongsToPlaylist(int playlistId, String songIds) throws SQLException {
+        String updateQuery = "update `songdatabase`.`song` set `songId` = ? where `playlist_Id` = ?;";
+        PreparedStatement statement = connection.prepareStatement(updateQuery);
+        statement.setString(1, songIds);
+        statement.setInt(2, playlistId);
+        int result = statement.executeUpdate();
+
+        return result > 0;
+    }
 }
