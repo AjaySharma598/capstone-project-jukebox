@@ -292,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669912686949</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="created add song to playlist method in PlaylistRepository class">
+      <created>1669914089324</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1669914089324</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -307,7 +314,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created MusicPlayerService class in service package" />
     <MESSAGE value="created PlaylistRepository ,SongRepository in repository package" />
     <MESSAGE value="created instance variable in song class" />
     <MESSAGE value="created constructor and getter setter for song class" />
@@ -332,7 +338,8 @@
     <MESSAGE value="constructor created" />
     <MESSAGE value="created search song by songId in song repository" />
     <MESSAGE value="created method to create playlist in PlaylistRepository class" />
-    <option name="LAST_COMMIT_MESSAGE" value="created method to create playlist in PlaylistRepository class" />
+    <MESSAGE value="created add song to playlist method in PlaylistRepository class" />
+    <option name="LAST_COMMIT_MESSAGE" value="created add song to playlist method in PlaylistRepository class" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

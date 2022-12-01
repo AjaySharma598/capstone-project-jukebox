@@ -22,7 +22,7 @@ public class PlaylistRepository {
     DatabaseService databaseService;
     Song song = new Song();
     Playlist playlist = new Playlist();
-    List<Playlist> songList = new ArrayList<Playlist>();
+    List<Song> songList = new ArrayList<>();
 
     public PlaylistRepository() throws SQLException, ClassNotFoundException {
         databaseService = new DatabaseService();
@@ -30,7 +30,7 @@ public class PlaylistRepository {
     }
 
     public Playlist createPlaylist(String playlistName) {
-        String query = "INSERT INTO `songdatabase`.`song`(`playlist_Name`) VALUES (?);";
+        String query = "INSERT INTO `songdatabase`.`playlist`(`playlist_Name`) VALUES (?);";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, playlistName);
@@ -52,12 +52,31 @@ public class PlaylistRepository {
 
 
     public boolean addSongsToPlaylist(int playlistId, String songIds) throws SQLException {
-        String updateQuery = "update `songdatabase`.`song` set `songId` = ? where `playlist_Id` = ?;";
+        String updateQuery = "update `songdatabase`.`playlist` set `songId` = ? where `playlist_Id` = ?;";
         PreparedStatement statement = connection.prepareStatement(updateQuery);
         statement.setString(1, songIds);
         statement.setInt(2, playlistId);
         int result = statement.executeUpdate();
-
         return result > 0;
+    }
+
+    public List<Song> getSongFromPlaylist(int playlistId) {
+        String query = "SELECT * FROM `songdatabase`.`playlist` WHERE `playlist_Id`=?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, playlistId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String songIds = resultSet.getString("songId");
+                String[] songIdArray = songIds.split(",");
+                for (String songId : songIdArray) {
+                    song = new SongRepository().getSongBySongId(Integer.parseInt(songId));
+                    songList.add(song);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return songList;
     }
 }
