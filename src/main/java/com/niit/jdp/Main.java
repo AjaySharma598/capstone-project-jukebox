@@ -9,9 +9,17 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         SongRepository songRepository = new SongRepository();
-        List<Song> songs = songRepository.displayAllSong();
-        for (Song song3 : songs) {
-            System.out.println(song3);
+//        List<Song> songs = songRepository.displayAllSong();
+//        for (Song song : songs) {
+//            System.out.println(song);
+//        }
+//
+//        System.out.println("songRepository.getSongByName(\"Aaja\") = " + songRepository.getSongByName("Wangan"));
+
+        List<Song> songByArtist = songRepository.getSongArtistByName("Maan");
+        for (Song song : songByArtist) {
+            System.out.println(song);
         }
+
     }
 }
