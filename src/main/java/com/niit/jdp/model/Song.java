@@ -14,7 +14,17 @@ public class Song {
     private String genre;
     private String artistName;
 
+    private String songPath;
+
     public Song() {
+    }
+
+    public Song(int songId, String songName, String genre, String artistName, String songPath) {
+        this.songId = songId;
+        this.songName = songName;
+        this.genre = genre;
+        this.artistName = artistName;
+        this.songPath = songPath;
     }
 
     public Song(int songId, String songName, String genre, String artistName) {
@@ -56,6 +66,14 @@ public class Song {
         this.artistName = artistName;
     }
 
+    public String getSongPath() {
+        return songPath;
+    }
+
+    public void setSongPath(String songPath) {
+        this.songPath = songPath;
+    }
+
     @Override
     public String toString() {
         return "Song{" +
@@ -63,6 +81,7 @@ public class Song {
                 ", songName='" + songName + '\'' +
                 ", genre='" + genre + '\'' +
                 ", artistName='" + artistName + '\'' +
+                ", songPath='" + songPath + '\'' +
                 '}';
     }
 
@@ -70,11 +89,11 @@ public class Song {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Song song)) return false;
-        return getSongId() == song.getSongId() && Objects.equals(getSongName(), song.getSongName()) && Objects.equals(getGenre(), song.getGenre()) && Objects.equals(getArtistName(), song.getArtistName());
+        return getSongId() == song.getSongId() && Objects.equals(getSongName(), song.getSongName()) && Objects.equals(getGenre(), song.getGenre()) && Objects.equals(getArtistName(), song.getArtistName()) && Objects.equals(getSongPath(), song.getSongPath());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSongId(), getSongName(), getGenre(), getArtistName());
+        return Objects.hash(getSongId(), getSongName(), getGenre(), getArtistName(), getSongPath());
     }
 }

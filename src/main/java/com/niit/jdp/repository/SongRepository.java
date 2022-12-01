@@ -6,6 +6,7 @@
 
 package com.niit.jdp.repository;
 
+import com.niit.jdp.exception.SongNotFoundException;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.service.DatabaseService;
 
@@ -34,16 +35,15 @@ public class SongRepository {
                 String songName = resultSet.getString("songName");
                 String genre = resultSet.getString("genre");
                 String artist = resultSet.getString("artist");
+
                 song = new Song(songId, songName, genre, artist);
                 songList.add(song);
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return songList;
     }
-
     public Song getSongByName(String songName) throws SQLException, SongNotFoundException {
         if (songName != null) {
             String query = "SELECT * FROM `songdatabase`.`song` WHERE `songName` = ?";

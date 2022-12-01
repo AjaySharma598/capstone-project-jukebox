@@ -4,7 +4,7 @@
  *Created With : Intellij IDEA Community Edition
  */
 
-package com.niit.jdp.repository;
+package com.niit.jdp.exception;
 
 public class SongNotFoundException extends Exception {
     public SongNotFoundException(String message) {
