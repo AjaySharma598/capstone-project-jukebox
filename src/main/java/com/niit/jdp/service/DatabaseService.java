@@ -13,8 +13,8 @@ import java.sql.SQLException;
 public class DatabaseService {
 
     private static final String URL = "jdbc:mysql://localhost:3306/songdatabase ";
-    private static final String USERNAME = "root ";
-    private static final String PASSWORD = "96169616 ";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "96169616";
 
     Connection connection;
 
