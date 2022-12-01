@@ -9,18 +9,21 @@ package com.niit.jdp.repository;
 import com.niit.jdp.exception.SongNotFoundException;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.service.DatabaseService;
+import com.niit.jdp.service.MusicPlayerService;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SongRepository {
+    MusicPlayerService musicPlayerService;
     Connection connection;
     DatabaseService databaseService;
 
     public SongRepository() throws SQLException, ClassNotFoundException {
         databaseService = new DatabaseService();
         connection = databaseService.getConnection();
+        musicPlayerService = new MusicPlayerService();
     }
     List<Song> songList = new ArrayList<>();
     Song song = new Song();

@@ -23,6 +23,7 @@ public class Main {
             System.out.println(song);
         }
 
+
         System.out.println("Enter the name of playlist to be created :");
         String playlistName = scanner.nextLine();
         Playlist playlist = playlistRepository.createPlaylist(playlistName);

@@ -7,7 +7,7 @@
     <list default="true" id="23732bdd-95bc-4341-816b-69171ecc12b8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/niit/jdp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/niit/jdp/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/niit/jdp/repository/PlaylistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/niit/jdp/repository/PlaylistRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/niit/jdp/repository/SongRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/niit/jdp/repository/SongRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/niit/jdp/service/MusicPlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/niit/jdp/service/MusicPlayerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -308,7 +308,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669915239458</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="created play method in MusicPlayerService class">
+      <created>1669926284015</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1669926284015</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -323,7 +330,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created instance variable in song class" />
     <MESSAGE value="created constructor and getter setter for song class" />
     <MESSAGE value="created to string and equal hash in song model class" />
     <MESSAGE value="Created instance final variable in DatabaseService class" />
@@ -348,7 +354,8 @@
     <MESSAGE value="created method to create playlist in PlaylistRepository class" />
     <MESSAGE value="created add song to playlist method in PlaylistRepository class" />
     <MESSAGE value="created get song from Playlist method in PlaylistRepository class" />
-    <option name="LAST_COMMIT_MESSAGE" value="created get song from Playlist method in PlaylistRepository class" />
+    <MESSAGE value="created play method in MusicPlayerService class" />
+    <option name="LAST_COMMIT_MESSAGE" value="created play method in MusicPlayerService class" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
