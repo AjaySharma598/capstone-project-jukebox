@@ -3,6 +3,7 @@ package com.niit.jdp;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.repository.SongNotFoundException;
 import com.niit.jdp.repository.SongRepository;
+import com.niit.jdp.service.MusicPlayerService;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException, SongNotFoundException {
         SongRepository songRepository = new SongRepository();
+        MusicPlayerService musicPlayerService = new MusicPlayerService();
 //        List<Song> songs = songRepository.displayAllSong();
 //        for (Song song : songs) {
 //            System.out.println(song);
@@ -25,6 +27,5 @@ public class Main {
         for (Song song : sadSong) {
             System.out.println(song);
         }
-
     }
 }
