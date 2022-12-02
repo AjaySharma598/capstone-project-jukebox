@@ -33,7 +33,7 @@ public class MusicPlayerService {
 
             //6. set a loop for the sound file
 
-            System.out.println("enter  1 to start 2 to stop");
+            System.out.println("enter 1 to start 2 to stop");
 
             int choice = 0;
             //7. start the clip
@@ -54,7 +54,7 @@ public class MusicPlayerService {
                         break;
                     }
                 }
-            } while (choice == 1 || choice == 2);
+            } while (choice >= 1);
             //8. get the exact length of the song
             long songLength = clip.getMicrosecondLength() / 1000L;
 

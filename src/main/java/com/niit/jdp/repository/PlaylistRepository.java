@@ -68,6 +68,7 @@ public class PlaylistRepository {
                     song = new SongRepository().getSongBySongId(Integer.parseInt(songId));
                     songList.add(song);
                 }
+
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

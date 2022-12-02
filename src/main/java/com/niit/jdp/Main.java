@@ -17,7 +17,7 @@ public class Main {
         SongRepository songRepository = new SongRepository();
         PlaylistRepository playlistRepository = new PlaylistRepository();
         MusicPlayerService musicPlayerService = new MusicPlayerService();
-        System.out.println("==============Music Player================");
+        System.out.println("==============Music Player=================");
         System.out.println("Enter the 1 to display all song\nEnter 2 to search song\nEnter 3 to create playlist\nEnter 0 to exit ");
         int choice = scanner.nextInt();
         switch (choice) {
@@ -33,9 +33,9 @@ public class Main {
                 break;
             }
             case 2: {
-                int choice3;
+
                 System.out.println("1 to search by name\n2 To search artist\n3 to search by genre");
-                choice3 = scanner.nextInt();
+                int choice3 = scanner.nextInt();
                 scanner.nextLine();
                 switch (choice3) {
                     case 1: {
@@ -46,10 +46,9 @@ public class Main {
                         break;
                     }
                     case 2: {
-                        String name1;
                         System.out.println("Enter the artist name : ");
-                        name1 = scanner.nextLine();
-                        songRepository.getSongByArtistName(name1);
+                        String name1 = scanner.nextLine();
+                        System.out.println(songRepository.getSongByArtistName(name1));
                         break;
                     }
                     case 3: {
@@ -60,8 +59,11 @@ public class Main {
                         break;
 
                     }
+                    default: {
+                        System.out.println("invalid");
+                        break;
+                    }
                 }
-
             }
             case 3: {
                 System.out.println("Enter the name of playlist to be created :");
@@ -69,6 +71,7 @@ public class Main {
                 scanner.nextLine();
                 Playlist playlist = playlistRepository.createPlaylist(playlistName);
                 System.out.println("playlist.getPlaylistId() = " + playlist.getPlaylistId());
+
 
                 System.out.println("Enter the playlist id to add songs to: ");
                 int playlistId = scanner.nextInt();
@@ -82,14 +85,16 @@ public class Main {
                     System.out.println("Not added");
                 }
 
+
                 System.out.println("Enter the playlist id to get songs from: ");
                 int playlistIdToGetSongsFrom = scanner.nextInt();
                 List<Song> songFromPlaylist = playlistRepository.getSongFromPlaylist(playlistIdToGetSongsFrom);
                 for (Song playlistSongs : songFromPlaylist) {
                     System.out.println(playlistSongs);
+                    musicPlayerService.play(playlistSongs.getSongPath());
                 }
+
             }
         }
-
     }
 }
