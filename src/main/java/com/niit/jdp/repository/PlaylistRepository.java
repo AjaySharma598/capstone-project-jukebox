@@ -46,7 +46,6 @@ public class PlaylistRepository {
 
         return playlist;
     }
-
     public boolean addSongsToPlaylist(int playlistId, String songIds) throws SQLException {
         String updateQuery = "update `songdatabase`.`playlist` set `songId` = ? where `playlist_Id` = ?;";
         PreparedStatement statement = connection.prepareStatement(updateQuery);

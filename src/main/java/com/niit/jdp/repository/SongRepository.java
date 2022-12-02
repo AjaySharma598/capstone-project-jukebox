@@ -47,21 +47,21 @@ public class SongRepository {
         return songList;
     }
     public Song getSongByName(String songName) throws SQLException, SongNotFoundException {
-        if (songName != null) {
-            String query = "SELECT * FROM `songdatabase`.`song` WHERE `songName` = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, songName);
-            ResultSet set = preparedStatement.executeQuery();
-            if (set.next()) {
-                int songId = set.getInt("songId");
-                String songName1 = set.getString("songName");
-                String genre = set.getString("genre");
-                String artist = set.getString("artist");
-                song = new Song(songId, songName1, genre, artist);
-            } else {
+        if (songName == null) {
+            throw new SongNotFoundException("song not found");
+        }
+        String query = "SELECT * FROM `songdatabase`.`song` WHERE `songName` = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, songName);
+        ResultSet set = preparedStatement.executeQuery();
+        if (set.next()) {
+            int songId = set.getInt("songId");
+            String songName1 = set.getString("songName");
+            String genre = set.getString("genre");
+            String artist = set.getString("artist");
+            song = new Song(songId, songName1, genre, artist);
+            musicPlayerService.play(set.getString("songPath"));
 
-                throw new SongNotFoundException("Song Not Found with this song name");
-            }
         }
         return song;
     }
@@ -118,6 +118,7 @@ public class SongRepository {
                 String genre = resultSet.getString("genre");
                 String artist = resultSet.getString("artist");
                 song = new Song(songId1, songName, genre, artist);
+                musicPlayerService.play(resultSet.getString("songPath"));
             }
 
         } catch (SQLException e) {

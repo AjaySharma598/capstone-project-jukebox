@@ -17,35 +17,79 @@ public class Main {
         SongRepository songRepository = new SongRepository();
         PlaylistRepository playlistRepository = new PlaylistRepository();
         MusicPlayerService musicPlayerService = new MusicPlayerService();
-        int choice = 0;
-        List<Song> songs = songRepository.displayAllSong();
-        for (Song song : songs) {
-            System.out.println(song);
+        System.out.println("==============Music Player================");
+        System.out.println("Enter the 1 to display all song\nEnter 2 to search song\nEnter 3 to create playlist\nEnter 0 to exit ");
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1: {
+                int choice1;
+                List<Song> songs = songRepository.displayAllSong();
+                for (Song song : songs) {
+                    System.out.println(song);
+                }
+                System.out.println("Enter song Id to play the specific song");
+                choice1 = scanner.nextInt();
+                songRepository.getSongBySongId(choice1);
+                break;
+            }
+            case 2: {
+                int choice3;
+                System.out.println("1 to search by name\n2 To search artist\n3 to search by genre");
+                choice3 = scanner.nextInt();
+                scanner.nextLine();
+                switch (choice3) {
+                    case 1: {
+                        String name;
+                        System.out.println("Enter the song name : ");
+                        name = scanner.nextLine();
+                        songRepository.getSongByName(name);
+                        break;
+                    }
+                    case 2: {
+                        String name1;
+                        System.out.println("Enter the artist name : ");
+                        name1 = scanner.nextLine();
+                        songRepository.getSongByArtistName(name1);
+                        break;
+                    }
+                    case 3: {
+                        String name3;
+                        System.out.println("Enter the genre");
+                        name3 = scanner.nextLine();
+                        songRepository.getSongByGenre(name3);
+                        break;
+
+                    }
+                }
+
+            }
+            case 3: {
+                System.out.println("Enter the name of playlist to be created :");
+                String playlistName = scanner.nextLine();
+                scanner.nextLine();
+                Playlist playlist = playlistRepository.createPlaylist(playlistName);
+                System.out.println("playlist.getPlaylistId() = " + playlist.getPlaylistId());
+
+                System.out.println("Enter the playlist id to add songs to: ");
+                int playlistId = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Enter the song ids to add to the playlist separated by comma: ");
+                String songIds = scanner.nextLine();
+                boolean songAdded = playlistRepository.addSongsToPlaylist(playlistId, songIds);
+                if (songAdded) {
+                    System.out.println("song added");
+                } else {
+                    System.out.println("Not added");
+                }
+
+                System.out.println("Enter the playlist id to get songs from: ");
+                int playlistIdToGetSongsFrom = scanner.nextInt();
+                List<Song> songFromPlaylist = playlistRepository.getSongFromPlaylist(playlistIdToGetSongsFrom);
+                for (Song playlistSongs : songFromPlaylist) {
+                    System.out.println(playlistSongs);
+                }
+            }
         }
 
-
-        System.out.println("Enter the name of playlist to be created :");
-        String playlistName = scanner.nextLine();
-        Playlist playlist = playlistRepository.createPlaylist(playlistName);
-        System.out.println("playlist.getPlaylistId() = " + playlist.getPlaylistId());
-
-        System.out.println("Enter the playlist id to add songs to: ");
-        int playlistId = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Enter the song ids to add to the playlist separated by comma: ");
-        String songIds = scanner.nextLine();
-        boolean songAdded = playlistRepository.addSongsToPlaylist(playlistId, songIds);
-        if (songAdded) {
-            System.out.println("song added");
-        } else {
-            System.out.println("Not added");
-        }
-
-        System.out.println("Enter the playlist id to get songs from: ");
-        int playlistIdToGetSongsFrom = scanner.nextInt();
-        List<Song> songFromPlaylist = playlistRepository.getSongFromPlaylist(playlistIdToGetSongsFrom);
-        for (Song playlistSongs : songFromPlaylist) {
-            System.out.println(playlistSongs);
-        }
     }
 }
