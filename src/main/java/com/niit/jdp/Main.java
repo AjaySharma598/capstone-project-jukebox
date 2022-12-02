@@ -55,7 +55,10 @@ public class Main {
                         String name3;
                         System.out.println("Enter the genre");
                         name3 = scanner.nextLine();
-                        songRepository.getSongByGenre(name3);
+                        List<Song> songByGenre = songRepository.getSongByGenre(name3);
+                        for (Song songsGenre : songByGenre) {
+                            System.out.println(songsGenre);
+                        }
                         break;
 
                     }
