@@ -25,10 +25,10 @@ public class SongRepository {
         connection = databaseService.getConnection();
         musicPlayerService = new MusicPlayerService();
     }
-    List<Song> songList = new ArrayList<>();
     Song song = new Song();
 
     public List<Song> displayAllSong() {
+        List<Song> songList = new ArrayList<>();
         String query = "Select * from `songdatabase`.`song`";
         try {
             Statement statement = connection.createStatement();
@@ -38,7 +38,8 @@ public class SongRepository {
                 String songName = resultSet.getString("songName");
                 String genre = resultSet.getString("genre");
                 String artist = resultSet.getString("artist");
-                song = new Song(songId, songName, genre, artist);
+                String songPath = resultSet.getString("songPath");
+                song = new Song(songId, songName, genre, artist, songPath);
                 songList.add(song);
             }
         } catch (SQLException e) {
@@ -59,14 +60,15 @@ public class SongRepository {
             String songName1 = set.getString("songName");
             String genre = set.getString("genre");
             String artist = set.getString("artist");
-            song = new Song(songId, songName1, genre, artist);
-            musicPlayerService.play(set.getString("songPath"));
-
+            String songPath = set.getString("songPath");
+            song = new Song(songId, songName1, genre, artist, songPath);
         }
+        //musicPlayerService.play(set.getString("songPath"));
         return song;
     }
 
     public List<Song> getSongByArtistName(String artistName) throws SQLException, SongNotFoundException {
+        List<Song> songList = new ArrayList<>();
         if (artistName != null) {
             String query = "SELECT * FROM `songdatabase`.`song` WHERE `artist` = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -77,7 +79,8 @@ public class SongRepository {
                 String songName1 = resultSet.getString("songName");
                 String genre = resultSet.getString("genre");
                 String artist = resultSet.getString("artist");
-                song = new Song(songId, songName1, genre, artist);
+                String songPath = resultSet.getString("songPath");
+                song = new Song(songId, songName1, genre, artist, songPath);
                 songList.add(song);
             }
         } else {
@@ -87,6 +90,7 @@ public class SongRepository {
     }
 
     public List<Song> getSongByGenre(String genreName) throws SQLException, SongNotFoundException {
+        List<Song> songList = new ArrayList<>();
         if (genreName != null) {
             String query = "SELECT * FROM `songdatabase`.`song` WHERE `genre` = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -97,7 +101,8 @@ public class SongRepository {
                 String songName1 = resultSet.getString("songName");
                 String genre = resultSet.getString("genre");
                 String artist = resultSet.getString("artist");
-                song = new Song(songId, songName1, genre, artist);
+                String songPath = resultSet.getString("songPath");
+                song = new Song(songId, songName1, genre, artist, songPath);
                 songList.add(song);
             }
         } else {
@@ -117,9 +122,10 @@ public class SongRepository {
                 String songName = resultSet.getString("songName");
                 String genre = resultSet.getString("genre");
                 String artist = resultSet.getString("artist");
-                song = new Song(songId1, songName, genre, artist);
-                musicPlayerService.play(resultSet.getString("songPath"));
+                String songPath = resultSet.getString("songPath");
+                song = new Song(songId1, songName, genre, artist, songPath);
             }
+            musicPlayerService.play(resultSet.getString("songPath"));
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

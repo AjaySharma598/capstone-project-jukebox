@@ -28,12 +28,10 @@ public class Main {
                     List<Song> songs = songRepository.displayAllSong();
                     for (Song song : songs) {
                         System.out.println(song);
-
-                        System.out.println("Enter song Id to play the specific song");
-                        choice1 = scanner.nextInt();
-                        songRepository.getSongBySongId(choice1);
-                        break;
                     }
+
+                        break;
+
                 case 2: {
                     int choice2 = 0;
                     do {
@@ -82,7 +80,7 @@ public class Main {
                 case 3: {
                     int choice3 = 0;
                     do {
-                        System.out.println(" 1 to create a playlist\n2  to add song in playlist\n3 to show display the playlist\n 0 to Exit ");
+                        System.out.println("1 to create a playlist\n2 to add song in playlist\n3 to show display the playlist\n0 to Exit ");
                         choice3 = scanner.nextInt();
                         switch (choice3) {
 
@@ -95,7 +93,10 @@ public class Main {
                                 break;
 
                             case 2:
-
+                                List<Playlist> playlists = playlistRepository.displayDetailsOfPlaylist();
+                                for (Playlist playlist1 : playlists) {
+                                    System.out.println(playlist1);
+                                }
                                 System.out.println("Enter the playlist id to add songs to: ");
                                 int playlistId = scanner.nextInt();
                                 scanner.nextLine();

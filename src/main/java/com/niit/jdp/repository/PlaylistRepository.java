@@ -9,6 +9,7 @@ package com.niit.jdp.repository;
 import com.niit.jdp.model.Playlist;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.service.DatabaseService;
+import com.niit.jdp.service.MusicPlayerService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,13 +20,14 @@ public class PlaylistRepository {
     DatabaseService databaseService;
     Song song = new Song();
     Playlist playlist;
-    List<Song> songList = new ArrayList<>();
-    List<Playlist> playlists;
+
+    MusicPlayerService musicPlayerService;
+
     public PlaylistRepository() throws SQLException, ClassNotFoundException {
         databaseService = new DatabaseService();
         connection = databaseService.getConnection();
         playlist = new Playlist();
-        playlists = new ArrayList<>();
+        musicPlayerService = new MusicPlayerService();
     }
 
     public Playlist createPlaylist(String playlistName) throws SQLException {
@@ -54,6 +56,7 @@ public class PlaylistRepository {
     }
 
     public List<Song> getSongFromPlaylist(int playlistId) {
+        List<Song> songList = new ArrayList<>();
         String query = "SELECT * FROM `songdatabase`.`playlist` WHERE `playlist_Id`=?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -71,10 +74,12 @@ public class PlaylistRepository {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        // musicPlayerService.play(song.getSongPath());
         return songList;
     }
 
     public List<Playlist> displayDetailsOfPlaylist() {
+        List<Playlist> playlists = new ArrayList<>();
         String query = "SELECT * FROM `songdatabase`.`playlist`;";
         try {
             Statement statement = connection.createStatement();
@@ -84,6 +89,7 @@ public class PlaylistRepository {
                 String playlist_name = resultSet.getString("playlist_Name");
                 playlist = new Playlist(playlist_id, playlist_name);
                 playlists.add(playlist);
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

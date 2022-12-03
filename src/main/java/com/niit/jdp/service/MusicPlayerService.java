@@ -33,12 +33,13 @@ public class MusicPlayerService {
 
             //6. set a loop for the sound file
 
-            System.out.println("enter 1 to start 2 to stop");
+            System.out.println("enter 1 to play And 2 to Stop");
 
             int choice = 0;
             //7. start the clip
             do {
                 choice = scanner.nextInt();
+                scanner.nextLine();
                 switch (choice) {
                     case 1: {
                         clip.start();
@@ -48,22 +49,25 @@ public class MusicPlayerService {
                         clip.stop();
                         break;
                     }
+                    case 0: {
+                        clip.stop();
+                        clip.close();
+                        break;
+                    }
                     default: {
                         clip.stop();
                         System.out.println("Invalid ");
                         break;
                     }
                 }
-            } while (choice >= 1);
+            } while (choice > 0);
             //8. get the exact length of the song
-            long songLength = clip.getMicrosecondLength() / 1000L;
+            //long songLength = clip.getMicrosecondLength() / 1000L;
 
             //9. Pause the current thread for the time the song is playing
-            Thread.sleep(songLength);
+            // Thread.sleep(songLength);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException exception) {
             exception.printStackTrace();
-        } catch (InterruptedException exception) {
-            System.err.println("The song was interrupted in between");
         }
     }
 

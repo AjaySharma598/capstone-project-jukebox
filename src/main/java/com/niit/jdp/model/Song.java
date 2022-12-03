@@ -27,12 +27,6 @@ public class Song {
         this.songPath = songPath;
     }
 
-    public Song(int songId, String songName, String genre, String artistName) {
-        this.songId = songId;
-        this.songName = songName;
-        this.genre = genre;
-        this.artistName = artistName;
-    }
 
     public int getSongId() {
         return songId;
@@ -76,7 +70,8 @@ public class Song {
 
     @Override
     public String toString() {
-        return "|songId=  " + songId + "| songName=   " + songName + '\'' + "  |  genre=     " + genre + '\'' + "  |  artistName=   " + artistName + '\'' + "  | songPath=   " + songPath + '\'' + '|';
+        // return String.format("%-10s%-20s%-20s%-100s",  songId,  songName, genre, artistName,  songPath);
+        return String.format("%-10s%-20s%-20s%-15s%-15s", songId, songName, genre, artistName, songPath);
     }
 
     @Override
