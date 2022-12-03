@@ -10,10 +10,7 @@ import com.niit.jdp.model.Playlist;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.service.DatabaseService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +20,12 @@ public class PlaylistRepository {
     Song song = new Song();
     Playlist playlist;
     List<Song> songList = new ArrayList<>();
-
+    List<Playlist> playlists;
     public PlaylistRepository() throws SQLException, ClassNotFoundException {
         databaseService = new DatabaseService();
         connection = databaseService.getConnection();
         playlist = new Playlist();
+        playlists = new ArrayList<>();
     }
 
     public Playlist createPlaylist(String playlistName) throws SQLException {
@@ -74,5 +72,22 @@ public class PlaylistRepository {
             throw new RuntimeException(e);
         }
         return songList;
+    }
+
+    public List<Playlist> displayDetailsOfPlaylist() {
+        String query = "SELECT * FROM `songdatabase`.`playlist`;";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                int playlist_id = resultSet.getInt("playlist_Id");
+                String playlist_name = resultSet.getString("playlist_Name");
+                playlist = new Playlist(playlist_id, playlist_name);
+                playlists.add(playlist);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return playlists;
     }
 }
