@@ -125,7 +125,7 @@ public class SongRepository {
                 String songPath = resultSet.getString("songPath");
                 song = new Song(songId1, songName, genre, artist, songPath);
             }
-            musicPlayerService.play(resultSet.getString("songPath"));
+          //  musicPlayerService.play(resultSet.getString("songPath"));
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
