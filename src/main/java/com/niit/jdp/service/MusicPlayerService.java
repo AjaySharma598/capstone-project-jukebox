@@ -33,7 +33,7 @@ public class MusicPlayerService {
 
             //6. set a loop for the sound file
 
-            System.out.println("enter 1 to play And 2 to Stop");
+            System.out.println("\u001B1 to Play\n2 to Stop\n0 to Exit]\u001B[m");
 
             int choice = 0;
             //7. start the clip
