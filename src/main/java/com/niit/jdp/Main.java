@@ -22,7 +22,7 @@ public class Main {
         System.out.println("=====================================================================================");
         int choice = 0;
         do {
-            System.out.println("1 for song \n2 for playlist\n3 to Exit");
+            System.out.println("1. Song Category \n2. Playlist Category\n0. to Exit!");
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
@@ -30,22 +30,33 @@ public class Main {
 
                     do {
                         System.out.println("**************************************************************************************");
-                        System.out.println("1 to display\n2 to search by song name\n3 to artist name\n4 to genre name\n 0 to exit");
+                        System.out.println("1. Display the Song list\n2. Search song  by Name and Play the Song\n" +
+                                "3. Search the song by Artist Name and Play\n" +
+                                "4. Search Song By Genre and Play\n" +
+                                "5. Search Song by Song Id and Play\n0. Exit!");
                         System.out.println("***************************************************************************************");
                         choice1 = scanner.nextInt();
                         scanner.nextLine();
                         switch (choice1) {
                             case 1:
-
+                                System.out.println("**************************************************************************************************************");
+                                System.out.format("%-10s%-20s%-20s%-15s%-9s", "songId", "songName", "genre", "artistName", "songPath\n");
+                                System.out.println("----------------------------------------------------------------------------------------------------------------");
                                 List<Song> songs = songRepository.displayAllSong();
                                 for (Song song : songs) {
                                     System.out.println(song);
                                 }
+                                System.out.println("");
+                                System.out.println(">>>Enter the Song Id to play the song<<<");
+                                int song = scanner.nextInt();
+                                Song songBySongId1 = songRepository.getSongBySongId(song);
+                                System.out.println(songBySongId1);
+                                musicPlayerService.play(songBySongId1.getSongPath());
                                 break;
                             case 2:
                                 String name;
                                 System.out.println("****************************");
-                                System.out.println("Enter the Song name : ");
+                                System.out.println(" >>>Enter the Song name <<< ");
                                 System.out.println("****************************");
                                 name = scanner.nextLine();
                                 Song songByName = songRepository.getSongByName(name);
@@ -54,7 +65,7 @@ public class Main {
                                 break;
                             case 3:
                                 System.out.println("**********************************");
-                                System.out.println("Enter the Artist name : ");
+                                System.out.println("  >>>Enter the Artist name<<<  ");
                                 System.out.println("***********************************");
                                 String name1 = scanner.nextLine();
                                 List<Song> songByArtistName = songRepository.getSongByArtistName(name1);
@@ -66,7 +77,7 @@ public class Main {
                             case 4:
                                 String name3;
                                 System.out.println("*****************************");
-                                System.out.println("Enter the Genre : ");
+                                System.out.println("  >>>Enter the Genre<<<   ");
                                 System.out.println("******************************");
                                 name3 = scanner.nextLine();
                                 List<Song> songByGenre = songRepository.getSongByGenre(name3);
@@ -78,7 +89,7 @@ public class Main {
                             case 5:
                                 int id;
                                 System.out.println("******************************");
-                                System.out.println("Enter the Song Id : ");
+                                System.out.println("   >>>Enter the Song Id <<<   ");
                                 System.out.println("******************************");
                                 id = scanner.nextInt();
                                 Song songBySongId = songRepository.getSongBySongId(id);
@@ -86,11 +97,11 @@ public class Main {
                                 musicPlayerService.play(songBySongId.getSongPath());
                                 break;
                             case 0:
-                                System.out.println("exit done");
+                                System.out.println("Exit Done!!");
                                 break;
                             default:
-                                System.out.println("*****************");
-                                System.err.println("Invalid choice");
+                                System.out.println("******************");
+                                System.err.println("Invalid Choice!!");
                                 System.out.println("******************");
                                 break;
                         }
@@ -100,7 +111,7 @@ public class Main {
                     int choice3 = 0;
                     do {
                         System.out.println("================playlist menu==================");
-                        System.out.println("1 to create Playlist\n2 to add song to Playlist\n3 to Display Song list \n4 to Display Playlist ");
+                        System.out.println("1. To Create Playlist\n2. To Add Songs To  The Playlist\n3. To Display the song list and play the song \n4. To Display Playlist\n0. to Exit! ");
                         System.out.println("================================================");
                         choice3 = scanner.nextInt();
                         scanner.nextLine();
@@ -114,39 +125,45 @@ public class Main {
                                 break;
 
                             case 1:
-                                System.out.println("************************************************");
-                                System.out.println("Enter the name of playlist to be created :");
-                                System.out.println("************************************************");
+                                System.out.println("**************************************************");
+                                System.out.println("  >>>Enter the Name of Playlist to be Created<<<  ");
+                                System.out.println("**************************************************");
                                 String playlistName = scanner.nextLine();
                                 //scanner.nextLine();
                                 Playlist playlist = playlistRepository.createPlaylist(playlistName);
                                 // System.out.println("playlist.getPlaylistId() = " + playlist.getPlaylistId());
+                                System.out.println(">>>>>>>>>>>>>PlayList Created<<<<<<<<<<<<<<<<<<<");
                                 break;
                             case 2:
-                                System.out.println("********************************************");
-                                System.out.println("Enter the playlist id to add songs to: ");
+                                System.out.format("%-10s%-9s", "playlistId", " playlistName\n");
+                                playlistRepository.displayDetailsOfPlaylist().forEach(System.out::println);
+                                System.out.println("**********************************************");
+                                System.out.println("  >>>Enter the Playlist id to add Songs To<<<  ");
                                 System.out.println("********************************************");
                                 int playlistId = scanner.nextInt();
                                 scanner.nextLine();
+                                System.out.format("%-10s%-20s%-20s%-15s%-9s", "songId", "songName", "genre", "artistName", "songPath\n");
+                                songRepository.displayAllSong().forEach(System.out::println);
                                 System.out.println("*****************************************************************");
-                                System.out.println("Enter the song ids to add to the playlist separated by comma: ");
+                                System.out.println(">>>Enter the Song Ids to Add to the Playlist separated by Comma<<<");
                                 System.out.println("******************************************************************");
                                 String songIds = scanner.nextLine();
                                 boolean songAdded = playlistRepository.addSongsToPlaylist(playlistId, songIds);
                                 if (songAdded) {
                                     System.out.println("-------------------");
-                                    System.out.println("song added");
+                                    System.out.println("Song Added#");
                                     System.out.println("-------------------");
                                 } else {
                                     System.out.println("-------------------");
-                                    System.out.println("Not added");
+                                    System.err.println("Not Added !");
                                     System.out.println("-------------------");
                                 }
                                 break;
                             case 3:
-                                System.out.println("**********************************************");
-                                System.out.println("Enter the playlist id to get songs from: ");
-                                System.out.println("**********************************************");
+                                playlistRepository.displayDetailsOfPlaylist().forEach(System.out::println);
+                                System.out.println("**********************************************************");
+                                System.out.println("  >>>Enter the Playlist Id to get Songs From Playlist<<<  ");
+                                System.out.println("***********************************************************");
                                 int playlistIdToGetSongsFrom = scanner.nextInt();
                                 List<Song> songFromPlaylist = playlistRepository.getSongFromPlaylist(playlistIdToGetSongsFrom);
                                 for (Song playlistSongs : songFromPlaylist) {
@@ -156,11 +173,11 @@ public class Main {
 
                                 break;
                             case 0:
-                                System.out.println("exit done");
+                                System.out.println("Exit Done");
                                 break;
                             default:
                                 System.out.println("-----------------");
-                                System.err.println("Invalid choice");
+                                System.err.println("Invalid choice!");
                                 System.out.println("-----------------");
                                 break;
                         }
@@ -172,7 +189,7 @@ public class Main {
 
                 default:
                     System.out.println("------------------");
-                    System.err.println("Invalid choice");
+                    System.err.println("Invalid choice!");
                     System.out.println("------------------");
                     break;
 

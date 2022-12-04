@@ -33,7 +33,7 @@ public class MusicPlayerService {
 
             //6. set a loop for the sound file
             System.out.println("**********************************************");
-            System.out.println("\u001B1 to Play\n2 to Stop\n0 to Exit]\u001B[m");
+            System.out.println("1. Play the Song\n2. Stop the Song\n0. Exit");
             System.out.println("***********************************************");
 
             int choice = 0;
@@ -57,7 +57,7 @@ public class MusicPlayerService {
                     }
                     default: {
                         clip.stop();
-                        System.out.println("Invalid ");
+                        System.err.println("Invalid! ");
                         break;
                     }
                 }
