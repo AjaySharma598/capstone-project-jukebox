@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class SongRepositoryTest {
 
@@ -35,18 +36,40 @@ class SongRepositoryTest {
     }
 
     @Test
+    void displayAllSongFailure() {
+        assertNotEquals(6, songRepository.displayAllSong().size());
+    }
+
+    @Test
     void getSongByName() throws SQLException, SongNotFoundException {
         assertEquals("iphone", songRepository.getSongByName("iphone").getSongName());
     }
 
     @Test
+    void getSongByNameFailure() throws SQLException, SongNotFoundException {
+        assertNotEquals("Aaja", songRepository.getSongByName("iphone").getSongName());
+    }
+
+    @Test
     void getSongByArtistName() throws SQLException, SongNotFoundException {
         //act
-        List<Song> expectedOutput = songRepository.getSongByArtistName("maan");
+        List<Song> songs = songRepository.getSongByArtistName("maan");
+        String expectedOutput = "Aaja";
         //arrange
-        Song song1 = songRepository.getSongByArtistName("maan").get(0);
+        String actualOutput = songs.get(0).getSongName();
         //assert
-        assertEquals("maan", song1.getArtistName());
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    void getSongByArtistNameFailure() throws SQLException, SongNotFoundException {
+        //act
+        List<Song> songs = songRepository.getSongByArtistName("maan");
+        String expectedOutput = "iphone";
+        //arrange
+        String actualOutput = songs.get(0).getSongName();
+        //assert
+        assertNotEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -56,8 +79,20 @@ class SongRepositoryTest {
     }
 
     @Test
+    void getSongByGenreFailure() throws SQLException, SongNotFoundException {
+        Song song1 = songRepository.getSongByGenre("sad").get(0);
+        assertNotEquals(100, song1.getSongId());
+    }
+
+    @Test
     void getSongBySongId() {
         Song songBySongId = songRepository.getSongBySongId(104);
         assertEquals("kehte hai", songBySongId.getSongName());
+    }
+
+    @Test
+    void getSongBySongIdFailure() {
+        Song songBySongId = songRepository.getSongBySongId(104);
+        assertNotEquals("iphone", songBySongId.getSongName());
     }
 }
