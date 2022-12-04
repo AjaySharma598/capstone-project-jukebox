@@ -32,7 +32,10 @@ class SongRepositoryTest {
 
     @Test
     void displayAllSong() {
-        assertEquals(7, songRepository.displayAllSong().size());
+        int expectedValue = 7;
+        List<Song> songs = songRepository.displayAllSong();
+        int actualValue = songs.size();
+        assertEquals(expectedValue, actualValue);
     }
 
     @Test
