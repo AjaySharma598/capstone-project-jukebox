@@ -17,6 +17,9 @@ public class Main {
         SongRepository songRepository = new SongRepository();
         MusicPlayerService musicPlayerService = new MusicPlayerService();
         PlaylistRepository playlistRepository = new PlaylistRepository();
+        System.out.println("=====================================================================================");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Music Player<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        System.out.println("=====================================================================================");
         int choice = 0;
         do {
             System.out.println("1 for song \n2 for playlist\n3 to Exit");
@@ -26,7 +29,9 @@ public class Main {
                     int choice1 = 0;
 
                     do {
+                        System.out.println("**************************************************************************************");
                         System.out.println("1 to display\n2 to search by song name\n3 to artist name\n4 to genre name\n 0 to exit");
+                        System.out.println("***************************************************************************************");
                         choice1 = scanner.nextInt();
                         scanner.nextLine();
                         switch (choice1) {
