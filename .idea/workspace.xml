@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="23732bdd-95bc-4341-816b-69171ecc12b8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/niit/jdp/repository/PlaylistRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/niit/jdp/repository/PlaylistRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/niit/jdp/repository/SongRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/niit/jdp/repository/SongRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sql/jukebox.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +55,7 @@
       <recent name="com.niit.jdp.repository" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SongRepositoryTest.getSongByName">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.niit.jdp.Main" />
       <module name="capstone-project-jukebox" />
@@ -134,11 +133,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.SongRepositoryTest.getSongByName" />
         <item itemvalue="JUnit.PlaylistRepositoryTest" />
         <item itemvalue="JUnit.SongRepositoryTest" />
         <item itemvalue="JUnit.PlaylistRepositoryTest.createPlaylist" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -150,20 +149,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1669811652373</updated>
-    </task>
-    <task id="LOCAL-00002" summary="changed jdk from 19 to 11">
-      <created>1669811761008</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1669811761008</updated>
-    </task>
-    <task id="LOCAL-00003" summary="created model,repository and service package">
-      <created>1669811981018</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1669811981018</updated>
     </task>
     <task id="LOCAL-00004" summary="created Song class in model package">
       <created>1669812089845</created>
@@ -494,7 +479,21 @@
       <option name="project" value="LOCAL" />
       <updated>1670217075118</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="created test case for failure in song Repository">
+      <created>1670221301678</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1670221301678</updated>
+    </task>
+    <task id="LOCAL-00052" summary="modified song repository class">
+      <created>1670247449686</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1670247449686</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -509,8 +508,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created logic in music player to play and stop the music" />
-    <MESSAGE value="created variable in playlist class in model package" />
     <MESSAGE value="created constructor ,getter and setter in playlist class" />
     <MESSAGE value="created to string and equal and hascode override method in playlist class" />
     <MESSAGE value="constructor created" />
@@ -534,9 +531,27 @@
     <MESSAGE value="reformatting done" />
     <MESSAGE value="created while loop in music player class to play and stop the media player" />
     <MESSAGE value="added doc comment to song Repository class" />
-    <option name="LAST_COMMIT_MESSAGE" value="added doc comment to song Repository class" />
+    <MESSAGE value="created test case for failure in song Repository" />
+    <MESSAGE value="modified song repository class" />
+    <option name="LAST_COMMIT_MESSAGE" value="modified song repository class" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/niit/jdp/repository/SongRepository.java</url>
+          <line>147</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/niit/jdp/repository/SongRepository.java</url>
+          <line>151</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
