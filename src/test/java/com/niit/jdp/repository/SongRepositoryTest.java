@@ -43,13 +43,16 @@ class SongRepositoryTest {
         int expectedValue = 6;
         List<Song> songs = songRepository.displayAllSong();
         int actualValue = songs.size();
-        assertEquals(expectedValue, actualValue);
+        assertNotEquals(expectedValue, actualValue);
 
     }
 
     @Test
     void getSongByName() throws SQLException, SongNotFoundException {
-        assertEquals("iphone", songRepository.getSongByName("iphone").getSongName());
+        Song song1 = songRepository.getSongByName("iphone");
+        String expectedResult = "iphone";
+        String actualResult = song1.getSongName();
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test

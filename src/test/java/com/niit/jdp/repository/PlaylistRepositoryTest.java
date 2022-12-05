@@ -31,9 +31,7 @@ class PlaylistRepositoryTest {
 
     @Test
     void createPlaylist() {
-
     }
-
     @Test
     void addSongsToPlaylistFailure() throws SQLException {
         assertEquals(false, playlistRepository.addSongsToPlaylist(0, null));
