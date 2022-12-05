@@ -178,7 +178,9 @@ public class Main {
                                 }
                                 break;
                             case 3:
+                                System.out.println("****************************************************************");
                                 System.out.format("%-10s%-9s", "playlistId", " playlistName\n");
+                                System.out.println("-----------------------------------------------------------------");
                                 playlistRepository.displayDetailsOfPlaylist().forEach(System.out::println);
                                 System.out.println("***********************************************************");
                                 System.out.println("  >>>Enter the Playlist Id to get Songs From Playlist<<<  ");
@@ -187,7 +189,6 @@ public class Main {
                                 List<Song> songFromPlaylist = playlistRepository.getSongFromPlaylist(playlistIdToGetSongsFrom);
                                 for (Song playlistSongs : songFromPlaylist) {
                                     System.out.println(playlistSongs);
-
                                     musicPlayerService.play(playlistSongs.getSongPath());
                                 }
 

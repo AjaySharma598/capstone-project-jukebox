@@ -32,9 +32,9 @@ public class MusicPlayerService {
             clip.open(audioInputStream);
 
             //6. set a loop for the sound file
-            System.out.println("**********************************************");
+            System.out.println("****************************************************************");
             System.out.println("1. Play the Song\n2. Stop the Song\n0. Exit");
-            System.out.println("***********************************************");
+            System.out.println("****************************************************************");
 
             int choice = 0;
             //7. start the clip
