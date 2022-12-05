@@ -30,7 +30,8 @@ public class Main {
 
                     do {
                         System.out.println("**************************************************************************************");
-                        System.out.println("1. Display the Song list\n2. Search song  by Name and Play the Song\n" +
+                        System.out.println("1. Display the Song list and Play the Song\n" +
+                                "2. Search song  by Name and Play the Song\n" +
                                 "3. Search the song by Artist Name and Play\n" +
                                 "4. Search Song By Genre and Play\n" +
                                 "5. Search Song by Song Id and Play\n0. Exit!");
@@ -111,7 +112,8 @@ public class Main {
                     int choice3 = 0;
                     do {
                         System.out.println("================playlist menu==================");
-                        System.out.println("1. To Create Playlist\n2. To Add Songs To  The Playlist\n3. To Display the song list and play the song \n4. To Display Playlist\n0. to Exit! ");
+                        System.out.println("1. To Create Playlist\n2. To Add Songs To  The Playlist\n" +
+                                "3. To Display the song list and play the song \n4. To Display Playlist\n0. to Exit! ");
                         System.out.println("================================================");
                         choice3 = scanner.nextInt();
                         scanner.nextLine();
@@ -131,7 +133,7 @@ public class Main {
                                 String playlistName = scanner.nextLine();
                                 //scanner.nextLine();
                                 Playlist playlist = playlistRepository.createPlaylist(playlistName);
-                                // System.out.println("playlist.getPlaylistId() = " + playlist.getPlaylistId());
+                                System.out.println("playlist Id = " + playlist.getPlaylistId());
                                 System.out.println(">>>>>>>>>>>>>PlayList Created<<<<<<<<<<<<<<<<<<<");
                                 break;
                             case 2:

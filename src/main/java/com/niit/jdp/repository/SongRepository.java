@@ -25,8 +25,14 @@ public class SongRepository {
         connection = databaseService.getConnection();
         musicPlayerService = new MusicPlayerService();
     }
+
     Song song = new Song();
 
+    /**
+     * This method is used to display the list of song
+     *
+     * @return - list of song type
+     */
     public List<Song> displayAllSong() {
         List<Song> songList = new ArrayList<>();
         String query = "Select * from `songdatabase`.`song`";
@@ -47,6 +53,13 @@ public class SongRepository {
         }
         return songList;
     }
+
+    /**
+     * This method is used to get song by Name
+     *
+     * @param -songName
+     * @return -Song
+     */
     public Song getSongByName(String songName) throws SQLException, SongNotFoundException {
         if (songName == null) {
             throw new SongNotFoundException("song not found");
@@ -67,6 +80,12 @@ public class SongRepository {
         return song;
     }
 
+    /**
+     * This method is used to get song by artist name
+     *
+     * @param -artistName
+     * @return-List of Song
+     */
     public List<Song> getSongByArtistName(String artistName) throws SQLException, SongNotFoundException {
         List<Song> songList = new ArrayList<>();
         if (artistName != null) {
@@ -89,6 +108,13 @@ public class SongRepository {
         return songList;
     }
 
+    /**
+     * This method is used to get song by genre name
+     *
+     * @param -genreName
+     * @throws -SQLException
+     * @return-List of song
+     */
     public List<Song> getSongByGenre(String genreName) throws SQLException, SongNotFoundException {
         List<Song> songList = new ArrayList<>();
         if (genreName != null) {
@@ -111,6 +137,12 @@ public class SongRepository {
         return songList;
     }
 
+    /**
+     * This method is used to get song by song id
+     *
+     * @param songId
+     * @return -Song
+     */
     public Song getSongBySongId(int songId) {
         String query = "SELECT * FROM `songdatabase`.`song` WHERE `songId`=? ;";
         try {
@@ -125,7 +157,7 @@ public class SongRepository {
                 String songPath = resultSet.getString("songPath");
                 song = new Song(songId1, songName, genre, artist, songPath);
             }
-          //  musicPlayerService.play(resultSet.getString("songPath"));
+            //  musicPlayerService.play(resultSet.getString("songPath"));
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

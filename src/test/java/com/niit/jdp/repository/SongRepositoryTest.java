@@ -40,7 +40,11 @@ class SongRepositoryTest {
 
     @Test
     void displayAllSongFailure() {
-        assertNotEquals(6, songRepository.displayAllSong().size());
+        int expectedValue = 6;
+        List<Song> songs = songRepository.displayAllSong();
+        int actualValue = songs.size();
+        assertEquals(expectedValue, actualValue);
+
     }
 
     @Test
