@@ -61,8 +61,14 @@ public class Main {
                                 System.out.println("****************************");
                                 name = scanner.nextLine();
                                 Song songByName = songRepository.getSongByName(name);
-                                System.out.println(songByName);
-                                musicPlayerService.play(songByName.getSongPath());
+
+
+                                if (!(name.equals(songByName.getSongName()))) {
+                                    System.out.println("invalid song Name");
+                                } else {
+                                    System.out.println(songByName);
+                                    musicPlayerService.play(songByName.getSongPath());
+                                }
                                 break;
                             case 3:
                                 System.out.println("**********************************");
@@ -74,6 +80,13 @@ public class Main {
                                     System.out.println(song1);
                                     musicPlayerService.play(song1.getSongPath());
                                 }
+                                // musicPlayerService.play(songByArtistName.get(0).getSongPath());
+//                                if(!name1.equals(songByArtistName.get(0).getArtistName())){
+//                                    System.out.println("Invalid Artist Name!");
+//                                }
+//                                 songByArtistName.forEach(song1 -> System.out.println(song1));
+
+//                                musicPlayerService.play(songByArtistName.get(0).getSongPath());
                                 break;
                             case 4:
                                 String name3;
@@ -94,6 +107,7 @@ public class Main {
                                 System.out.println("******************************");
                                 id = scanner.nextInt();
                                 Song songBySongId = songRepository.getSongBySongId(id);
+
                                 System.out.println(songBySongId);
                                 musicPlayerService.play(songBySongId.getSongPath());
                                 break;

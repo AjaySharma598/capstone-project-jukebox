@@ -76,6 +76,7 @@ public class SongRepository {
             String songPath = set.getString("songPath");
             song = new Song(songId, songName1, genre, artist, songPath);
         }
+
         //musicPlayerService.play(set.getString("songPath"));
         return song;
     }
@@ -110,7 +111,6 @@ public class SongRepository {
 
     /**
      * This method is used to get song by genre name
-     *
      * @param -genreName
      * @throws -SQLException
      * @return-List of song
@@ -144,6 +144,7 @@ public class SongRepository {
      * @return -Song
      */
     public Song getSongBySongId(int songId) {
+
         String query = "SELECT * FROM `songdatabase`.`song` WHERE `songId`=? ;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
