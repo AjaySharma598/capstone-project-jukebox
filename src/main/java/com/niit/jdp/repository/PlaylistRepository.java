@@ -6,6 +6,7 @@
 
 package com.niit.jdp.repository;
 
+import com.niit.jdp.exception.PlayListNotFoundException;
 import com.niit.jdp.model.Playlist;
 import com.niit.jdp.model.Song;
 import com.niit.jdp.service.DatabaseService;
@@ -30,9 +31,16 @@ public class PlaylistRepository {
         musicPlayerService = new MusicPlayerService();
     }
 
+    /**
+     * This method is used to create a playlist
+     *
+     * @param -playlistName
+     * @return-Playlist
+     * @throws- SQLException
+     */
     public Playlist createPlaylist(String playlistName) throws SQLException {
-        String query = "INSERT INTO `songdatabase`.`playlist`(`playlist_Name`) VALUES (?);";
 
+        String query = "INSERT INTO `songdatabase`.`playlist`(`playlist_Name`) VALUES (?);";
         PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, playlistName);
         int set = preparedStatement.executeUpdate();
@@ -41,11 +49,19 @@ public class PlaylistRepository {
             if (generatedKeys.next()) {
                 playlist.setPlaylistId(generatedKeys.getInt(1));
                 playlist.setPlaylistName(playlistName);
-                }
             }
+        }
 
         return playlist;
     }
+
+    /**
+     * This method is used to add songs in playlist
+     *
+     * @return -Boolean value
+     * @param- int playlistId,songIds
+     * @throws- SQLException
+     */
     public boolean addSongsToPlaylist(int playlistId, String songIds) throws SQLException {
         String updateQuery = "update `songdatabase`.`playlist` set `songId` = ? where `playlist_Id` = ?;";
         PreparedStatement statement = connection.prepareStatement(updateQuery);
@@ -55,7 +71,17 @@ public class PlaylistRepository {
         return result > 0;
     }
 
-    public List<Song> getSongFromPlaylist(int playlistId) {
+    /**
+     * This method is used to get song from playlist
+     *
+     * @param -`playlistId`
+     * @throws -PlayListNotFoundException
+     * @return- List of song type
+     */
+    public List<Song> getSongFromPlaylist(int playlistId) throws PlayListNotFoundException {
+        if (playlistId == 0) {
+            throw new PlayListNotFoundException("Invalid playlist Id");
+        }
         List<Song> songList = new ArrayList<>();
         String query = "SELECT * FROM `songdatabase`.`playlist` WHERE `playlist_Id`=?;";
         try {
@@ -74,10 +100,16 @@ public class PlaylistRepository {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
         //musicPlayerService.play(song.getSongPath());
         return songList;
     }
 
+    /**
+     * This method is used to display all detail from the playlist
+     *
+     * @return-list type ofPlaylist
+     */
     public List<Playlist> displayDetailsOfPlaylist() {
         List<Playlist> playlists = new ArrayList<>();
         String query = "SELECT * FROM `songdatabase`.`playlist`;";

@@ -1,5 +1,6 @@
 package com.niit.jdp.repository;
 
+import com.niit.jdp.exception.PlayListNotFoundException;
 import com.niit.jdp.model.Playlist;
 import com.niit.jdp.model.Song;
 import org.junit.jupiter.api.AfterEach;
@@ -9,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PlaylistRepositoryTest {
     PlaylistRepository playlistRepository;
@@ -30,8 +30,12 @@ class PlaylistRepositoryTest {
     }
 
     @Test
-    void createPlaylist() {
+    void createPlaylist() throws SQLException {
+
+        assertNotNull(playlistRepository.createPlaylist(null));
+
     }
+
     @Test
     void addSongsToPlaylistFailure() throws SQLException {
         assertEquals(false, playlistRepository.addSongsToPlaylist(0, null));
@@ -43,7 +47,7 @@ class PlaylistRepositoryTest {
     }
 
     @Test
-    void getSongFromPlaylistFailure() {
+    void getSongFromPlaylistFailure() throws PlayListNotFoundException {
         List<Song> songFromPlaylist = playlistRepository.getSongFromPlaylist(15);
         String expectedResult = "iphone";
         String actualResult = songFromPlaylist.get(0).getSongName();
@@ -51,7 +55,7 @@ class PlaylistRepositoryTest {
     }
 
     @Test
-    void getSongFromPlaylist() {
+    void getSongFromPlaylist() throws PlayListNotFoundException {
         List<Song> songFromPlaylist = playlistRepository.getSongFromPlaylist(15);
         String expectedResult = "Aaja";
         String actualResult = songFromPlaylist.get(0).getSongName();

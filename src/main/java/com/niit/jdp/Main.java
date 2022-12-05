@@ -1,5 +1,6 @@
 package com.niit.jdp;
 
+import com.niit.jdp.exception.PlayListNotFoundException;
 import com.niit.jdp.exception.SongNotFoundException;
 import com.niit.jdp.model.Playlist;
 import com.niit.jdp.model.Song;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, SongNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, SongNotFoundException, PlayListNotFoundException {
         Scanner scanner = new Scanner(System.in);
         SongRepository songRepository = new SongRepository();
         MusicPlayerService musicPlayerService = new MusicPlayerService();
@@ -41,7 +42,7 @@ public class Main {
                         switch (choice1) {
                             case 1:
                                 System.out.println("**************************************************************************************************************");
-                                System.out.format("%-10s%-20s%-20s%-15s%-9s", "songId", "songName", "genre", "artistName", "songPath\n");
+                                System.out.format("%-10s%-20s%-20s%-11s", "songId", "songName", "genre", "artistName\n");
                                 System.out.println("----------------------------------------------------------------------------------------------------------------");
                                 List<Song> songs = songRepository.displayAllSong();
                                 for (Song song : songs) {
@@ -51,8 +52,13 @@ public class Main {
                                 System.out.println(">>>Enter the Song Id to play the song<<<");
                                 int song = scanner.nextInt();
                                 Song songBySongId1 = songRepository.getSongBySongId(song);
-                                System.out.println(songBySongId1);
-                                musicPlayerService.play(songBySongId1.getSongPath());
+
+                                if (!(song == songBySongId1.getSongId())) {
+                                    System.out.println("song id not found");
+                                } else {
+                                    System.out.println(songBySongId1);
+                                    musicPlayerService.play(songBySongId1.getSongPath());
+                                }
                                 break;
                             case 2:
                                 String name;
@@ -80,13 +86,6 @@ public class Main {
                                     System.out.println(song1);
                                     musicPlayerService.play(song1.getSongPath());
                                 }
-                                // musicPlayerService.play(songByArtistName.get(0).getSongPath());
-//                                if(!name1.equals(songByArtistName.get(0).getArtistName())){
-//                                    System.out.println("Invalid Artist Name!");
-//                                }
-//                                 songByArtistName.forEach(song1 -> System.out.println(song1));
-
-//                                musicPlayerService.play(songByArtistName.get(0).getSongPath());
                                 break;
                             case 4:
                                 String name3;
@@ -107,9 +106,12 @@ public class Main {
                                 System.out.println("******************************");
                                 id = scanner.nextInt();
                                 Song songBySongId = songRepository.getSongBySongId(id);
-
-                                System.out.println(songBySongId);
-                                musicPlayerService.play(songBySongId.getSongPath());
+                                if (!(id == songBySongId.getSongId())) {
+                                    System.out.println("Invalid song Id");
+                                } else {
+                                    System.out.println(songBySongId);
+                                    musicPlayerService.play(songBySongId.getSongPath());
+                                }
                                 break;
                             case 0:
                                 System.out.println("Exit Done!!");
@@ -176,20 +178,22 @@ public class Main {
                                 }
                                 break;
                             case 3:
+                                System.out.format("%-10s%-9s", "playlistId", " playlistName\n");
                                 playlistRepository.displayDetailsOfPlaylist().forEach(System.out::println);
-                                System.out.println("**********************************************************");
+                                System.out.println("***********************************************************");
                                 System.out.println("  >>>Enter the Playlist Id to get Songs From Playlist<<<  ");
                                 System.out.println("***********************************************************");
                                 int playlistIdToGetSongsFrom = scanner.nextInt();
                                 List<Song> songFromPlaylist = playlistRepository.getSongFromPlaylist(playlistIdToGetSongsFrom);
                                 for (Song playlistSongs : songFromPlaylist) {
                                     System.out.println(playlistSongs);
+
                                     musicPlayerService.play(playlistSongs.getSongPath());
                                 }
 
                                 break;
                             case 0:
-                                System.out.println("Exit Done");
+                                System.out.println("Exit Done#");
                                 break;
                             default:
                                 System.out.println("-----------------");

@@ -71,7 +71,7 @@ public class Song {
     @Override
     public String toString() {
         // return String.format("%-10s%-20s%-20s%-100s",  songId,  songName, genre, artistName,  songPath);
-        return String.format("%-10s%-20s%-20s%-15s%-15s", songId, songName, genre, artistName, songPath);
+        return String.format("%-10s%-20s%-20s%-15s", songId, songName, genre, artistName);
     }
 
     @Override
